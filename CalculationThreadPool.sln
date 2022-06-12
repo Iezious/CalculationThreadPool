@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CalculationThreadPool", "src\CalculationThreadPool\CalculationThreadPool.fsproj", "{94AB73B3-3727-482D-9F44-712FF93B8C5E}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CalculationThreadPool.IntergrationTests", "tests\CalculationThreadPool.IntergrationTests\CalculationThreadPool.IntergrationTests.fsproj", "{7D817089-882A-4BF3-9BFF-F1292F0BA9DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94AB73B3-3727-482D-9F44-712FF93B8C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94AB73B3-3727-482D-9F44-712FF93B8C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94AB73B3-3727-482D-9F44-712FF93B8C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94AB73B3-3727-482D-9F44-712FF93B8C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D817089-882A-4BF3-9BFF-F1292F0BA9DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D817089-882A-4BF3-9BFF-F1292F0BA9DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D817089-882A-4BF3-9BFF-F1292F0BA9DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D817089-882A-4BF3-9BFF-F1292F0BA9DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
