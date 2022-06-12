@@ -8,7 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Library.fs" />
+        <Compile Include="ThreadPoolMailboxMessage.fs" />
+        <Compile Include="CommonQueueThreadPool.fs" />
+        <Compile Include="RoundrobingThreadPool.fs" />
     </ItemGroup>
 
 </Project>

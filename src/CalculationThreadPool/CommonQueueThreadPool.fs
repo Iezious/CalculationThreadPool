@@ -4,15 +4,7 @@ open System.Collections.Generic
 open System.Threading
 open System.Threading.Tasks
 
-type internal ThreadPoolMailboxMessage<'treq, 'tres> =
-    {
-        Request: 'treq
-        Calculator: 'treq -> 'tres
-        ResultAwait:  TaskCompletionSource<Result<'tres, exn>> 
-//        ResultAwait:  AsyncReplyChannel<Result<'tres, exn>> 
-    }
-
-type ThreadPool<'treq, 'tres>(threadsCount: int) =
+type CommonQueueThreadPool<'treq, 'tres>(threadsCount: int) =
     
     let waitForMessage = new AutoResetEvent(false)
     let queue = Queue<ThreadPoolMailboxMessage<'treq, 'tres>>()

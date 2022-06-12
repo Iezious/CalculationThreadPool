@@ -15,9 +15,9 @@ module NetPoolCalc =
             let rec loop() = async {
                 match! inbox.Receive() with
                 | CalculationTaskMessage.DoWork (start, value, ch) ->
-                    let inWait = (DateTime.UtcNow - start).Ticks / 10000L
+                    let inWait = (DateTime.UtcNow - start).Ticks / 1000L
                     let res = PrimeCalculations.nextPrime(value)
-                    let total = (DateTime.UtcNow - start).Ticks / 10000L 
+                    let total = (DateTime.UtcNow - start).Ticks / 1000L 
                 
                     ch.Reply(res, inWait, total)
                 | Die ->
@@ -57,6 +57,8 @@ module NetPoolCalc =
             seq { for _ in 1..callsCount -> step() }
             |> fun (s) -> Async.Parallel(s, 500)
             
+        totalWaitingTime <- totalWaitingTime / 10L
+        totalExecutionTime <- totalExecutionTime / 10L            
                     
         return (double totalWaitingTime/ double callsCount), ( double totalExecutionTime / double callsCount) 
     }
