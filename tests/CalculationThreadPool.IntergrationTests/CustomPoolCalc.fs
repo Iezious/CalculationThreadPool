@@ -5,7 +5,7 @@ open System.Threading
 
 module CustomPoolCalc =
     
-    let calcPool = Libraries.CalculationThreadPool.ThreadPool<int32, int32> 50
+    let calcPool = Libraries.CalculationThreadPool.ThreadPool<int32, int32> 10
     
     let private actor() =
         
@@ -15,7 +15,7 @@ module CustomPoolCalc =
                 match! inbox.Receive() with
                 | CalculationTaskMessage.DoWork (start, value, ch) ->
                     let inWait = (DateTime.UtcNow - start).Ticks / 10000L
-                    let! res = calcPool.Execute(value, PrimeCalculations.nextPrime, 10000)
+                    let! res = calcPool.Execute(value, PrimeCalculations.nextPrime, 10000) |> Async.AwaitTask
                     let total = (DateTime.UtcNow - start).Ticks / 10000L 
                     match res with
                     | Ok v -> ch.Reply(v, inWait, total)
@@ -37,7 +37,7 @@ module CustomPoolCalc =
         
    
     
-    let run actorsCount callsCount = async {
+    let run actorsCount callsCount stater = async {
         
         let actors = [| for i in 1..actorsCount -> actor() |]
         let ra = Random(DateTime.Now.Ticks |> int32)
@@ -47,7 +47,7 @@ module CustomPoolCalc =
         
         let step() = async {
             let actor = actors[ra.Next(actorsCount)]
-            let! res, wait, total = actor.Calc(10000)
+            let! res, wait, total = actor.Calc(stater)
             Interlocked.Add(&totalWaitingTime, wait) |> ignore
             Interlocked.Add(&totalExecutionTime, total) |> ignore
             return res

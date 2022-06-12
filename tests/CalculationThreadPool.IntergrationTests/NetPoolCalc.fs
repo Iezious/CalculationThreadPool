@@ -37,7 +37,7 @@ module NetPoolCalc =
         
    
     
-    let run actorsCount callsCount = async {
+    let run actorsCount callsCount stater = async {
         
         let actors = [| for i in 1..actorsCount -> actor() |]
         let ra = Random(DateTime.Now.Ticks |> int32)
@@ -47,7 +47,7 @@ module NetPoolCalc =
         
         let step() = async {
             let actor = actors[ra.Next(actorsCount)]
-            let! res, wait, total = actor.Calc(10000)
+            let! res, wait, total = actor.Calc(stater)
             Interlocked.Add(&totalWaitingTime, wait) |> ignore
             Interlocked.Add(&totalExecutionTime, total) |> ignore
             return res
